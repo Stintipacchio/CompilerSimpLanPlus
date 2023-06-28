@@ -1,4 +1,5 @@
 import antlr.SimpLanPlusParser;
+import ast.Node;
 import org.antlr.v4.runtime.*;
 
 import java.io.*;
@@ -7,6 +8,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import ast.SimpLanPlusVisitorImpl;
 
 
 
@@ -47,18 +49,15 @@ public class Main {
             Files.write(Paths.get("out/errors.txt"), toWrite.getBytes(), StandardOpenOption.APPEND);
         }
 
-        //Exercise 2-3 VECCHIO
-        SymbolTable symboltable = new SymbolTable();
-        //symboltable.enterScope(symboltable.getRoot());
-
-        String tipo = ST_TC(symboltable, input, symboltable.getRoot(), codebuilder);
-
 
         //Exercise 2-3
         CharStream stream2 = CharStreams.fromString(input);
         antlr.SimpLanPlusLexer lexer2 = new antlr.SimpLanPlusLexer(stream2);
         CommonTokenStream TokenStream = new CommonTokenStream(lexer2);
         SimpLanPlusParser parser = new SimpLanPlusParser(TokenStream);
+        ast.SimpLanPlusVisitorImpl visitor = new ast.SimpLanPlusVisitorImpl();
+
+        Node ast = visitor.visit(parser.prog());  //non sono cerca mi sa che crea l albero
 
 
     }
