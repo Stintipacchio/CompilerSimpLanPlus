@@ -6,11 +6,11 @@ import evaluator.SimpLanlib;
 import semanticanalysis.SemanticError;
 import semanticanalysis.SymbolTable;
 
-public class EqualNode implements Node {
+public class RelationalOperatorNode implements Node {
 	private Node left ;
 	private Node right ;
 
-	public EqualNode (Node _left, Node _right) {
+	public RelationalOperatorNode (Node _left, Node _right) {
 		left = _left ;
 		right = _right ;
 	}

@@ -10,10 +10,10 @@ public class DecNode implements Node {
 	private Node exp;
 	private int nesting;
 	
-	public DecNode(String _id, Node _type, Node _exp) {
+	public DecNode(String _id, Node _type) {
 		id = _id ;
 		type = _type ;
-		exp = _exp ;
+		// exp = _exp ;  //la grammatica G4 non accetta più dichiarazione e assegnamento insieme
 	}
   
 	public ArrayList<SemanticError> checkSemantics(SymbolTable ST, int _nesting) {

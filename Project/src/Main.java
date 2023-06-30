@@ -9,6 +9,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import ast.SimpLanPlusVisitorImpl;
+import semanticanalysis.SymbolTable;
 
 
 
@@ -48,6 +49,7 @@ public class Main {
             String toWrite = "Errore " + i + 1 + ": Linea " + errLine + ", carattere numero " + errPos + " -> " + errStr + "\n";
             Files.write(Paths.get("out/errors.txt"), toWrite.getBytes(), StandardOpenOption.APPEND);
         }
+        //analisi sintattica
 
 
         //Exercise 2-3
@@ -55,9 +57,13 @@ public class Main {
         antlr.SimpLanPlusLexer lexer2 = new antlr.SimpLanPlusLexer(stream2);
         CommonTokenStream TokenStream = new CommonTokenStream(lexer2);
         SimpLanPlusParser parser = new SimpLanPlusParser(TokenStream);
-        ast.SimpLanPlusVisitorImpl visitor = new ast.SimpLanPlusVisitorImpl();
+        ast.SimpLanPlusVisitorImpl visita_grammatica = new ast.SimpLanPlusVisitorImpl();
 
-        Node ast = visitor.visit(parser.prog());  //non sono cerca mi sa che crea l albero
+        Node albero_grammatica = visita_grammatica.visit(parser.prog());
+        SymbolTable symbol_table = new SymbolTable();
+        int offset = 0;
+        ArrayList<SemanticError> errors = albero_grammatica.checkSemantics(symbol_table, offset);
+
 
 
     }
