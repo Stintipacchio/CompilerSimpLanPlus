@@ -32,7 +32,7 @@ exp    :  INTEGER                                                               
        | 'true'                                                                                                         #expTrue
        | 'false'                                                                                                        #expFalse
        | ID                                                                                                             #expId
-       | '!' exp #notIdExp
+       | '!' exp                                                                                                        #expNotId
        | e1=exp (op='*' | op='/') e2=exp                                                                                #expMulDiv
        | e1=exp (op='+' | op='-') e2=exp                                                                                #expPlusMinus
        | e1=exp (op='>' | op='<' | op='>=' | op='<=' | op='==') e2=exp                                                  #expReop//#cfrExp   prima
@@ -61,3 +61,4 @@ ID              : CHAR (CHAR | DIGIT)* ;
 WS              : (' '|'\t'|'\n'|'\r')-> skip;
 LINECOMENTS     : '//' (~('\n'|'\r'))* -> skip;
 BLOCKCOMENTS    : '/*'( ~('/'|'*')|'/'~'*'|'*'~'/'|BLOCKCOMENTS)* '*/' -> skip;
+ERR             : .  -> channel(HIDDEN);

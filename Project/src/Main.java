@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import ast.SimpLanPlusVisitorImpl;
 import semanticanalysis.SymbolTable;
+import semanticanalysis.SemanticError;
 
 
 
@@ -17,7 +18,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        String input = new String(Files.readAllBytes(Paths.get("src/input.txt")));
+        String input = new String(Files.readAllBytes(Paths.get("C:\\Users\\lucag\\OneDrive\\Documenti\\GitHub\\CompilerSimpLanPlus\\Project\\src\\input.txt")));
 
         //Exercise 1
         CharStream stream = CharStreams.fromString(input);

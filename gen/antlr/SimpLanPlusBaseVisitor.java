@@ -67,131 +67,131 @@ public class SimpLanPlusBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAsgStm(SimpLanPlusParser.AsgStmContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStmAsg(SimpLanPlusParser.StmAsgContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunCallStm(SimpLanPlusParser.FunCallStmContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStmCallFun(SimpLanPlusParser.StmCallFunContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIfStm(SimpLanPlusParser.IfStmContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStmIf(SimpLanPlusParser.StmIfContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitThenStmBranch(SimpLanPlusParser.ThenStmBranchContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStmThenBranch(SimpLanPlusParser.StmThenBranchContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitElseStmBranch(SimpLanPlusParser.ElseStmBranchContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStmElseBranch(SimpLanPlusParser.StmElseBranchContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPlusMinusExp(SimpLanPlusParser.PlusMinusExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpNotId(SimpLanPlusParser.ExpNotIdContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTrueExp(SimpLanPlusParser.TrueExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpBracket(SimpLanPlusParser.ExpBracketContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIdExp(SimpLanPlusParser.IdExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpMulDiv(SimpLanPlusParser.ExpMulDivContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNotIdExp(SimpLanPlusParser.NotIdExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpAndOr(SimpLanPlusParser.ExpAndOrContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMulDivExp(SimpLanPlusParser.MulDivExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpTrue(SimpLanPlusParser.ExpTrueContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunCallExp(SimpLanPlusParser.FunCallExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpCallFun(SimpLanPlusParser.ExpCallFunContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIfExp(SimpLanPlusParser.IfExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpInt(SimpLanPlusParser.ExpIntContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBracketExp(SimpLanPlusParser.BracketExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpPlusMinus(SimpLanPlusParser.ExpPlusMinusContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFalseExp(SimpLanPlusParser.FalseExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpIf(SimpLanPlusParser.ExpIfContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCfrExp(SimpLanPlusParser.CfrExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpReop(SimpLanPlusParser.ExpReopContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLogicalExp(SimpLanPlusParser.LogicalExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpFalse(SimpLanPlusParser.ExpFalseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIntExp(SimpLanPlusParser.IntExpContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpId(SimpLanPlusParser.ExpIdContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitThenExpBranch(SimpLanPlusParser.ThenExpBranchContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpThenBranch(SimpLanPlusParser.ExpThenBranchContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitElseExpBranch(SimpLanPlusParser.ElseExpBranchContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpElseBranch(SimpLanPlusParser.ExpElseBranchContext ctx) { return visitChildren(ctx); }
 }

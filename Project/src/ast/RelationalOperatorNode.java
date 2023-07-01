@@ -9,10 +9,12 @@ import semanticanalysis.SymbolTable;
 public class RelationalOperatorNode implements Node {
 	private Node left ;
 	private Node right ;
+	private String Op;
 
-	public RelationalOperatorNode (Node _left, Node _right) {
+	public RelationalOperatorNode (Node _left, Node _right, String _op) {
 		left = _left ;
 		right = _right ;
+		Op = _op;
 	}
 
 	public ArrayList<SemanticError> checkSemantics(SymbolTable ST, int _nesting) {

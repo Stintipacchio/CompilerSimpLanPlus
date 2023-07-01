@@ -8,6 +8,8 @@ public class STentry {
 	private int nesting ;
 	private String label ;
 
+	//private boolean initialized;           da verificare
+
 	
 	public STentry(Type _type, int _offset, int _nesting) {
 		type = _type ;
@@ -37,5 +39,10 @@ public class STentry {
 	public String getlabel() {
 		return label ;
 	}
+
+	/*public void setInitialized() {
+		initialized = true;
+	}*/
+
 
 }
