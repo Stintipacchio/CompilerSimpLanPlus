@@ -29,12 +29,9 @@ public class DecNode implements Node {
 	}
   
 	public Type typeCheck () {
-		if (exp.typeCheck().getClass().equals(type.getClass() )) 
-			return null ;
-		else {
-			System.out.println("Type Error: incompatible type of expression for variable "+id) ;
-			return new ErrorType() ;
-		}     
+
+		//la grammatica permette di dichiarare anche variabili void. Non so se segnarle errore o no
+		return null;
 	}
   
 	public String codeGeneration() {

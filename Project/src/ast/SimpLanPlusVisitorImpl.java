@@ -80,7 +80,7 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 		} else {
 			innerExp = null;
 		}
-		return new FunNode(ctx.ID().getText(), (Type) visit(ctx.type()), _param, innerDec, innerExp);
+		return new FunNode(ctx.ID().getText(), (Type) visit(ctx.type()), _param, innerDec, innerStatements, innerExp);
 	}
 	
 	public Node visitType(SimpLanPlusParser.TypeContext ctx) {

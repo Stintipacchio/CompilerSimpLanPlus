@@ -11,19 +11,23 @@ public class FunNode implements Node {
 	private String id;
 	private Type returntype ; 
 	private ArrayList<ParNode> parlist ; 
-	private ArrayList<Node> declist ; 
-	private Node body ;
+	private ArrayList<Node> declist ;
+	private ArrayList<Node> stmlist ;
+	private Node exp;
 	private ArrowType type ;
 	private int nesting ;
 	private String flabel ;
-  
-	public FunNode (String _id, Type _type, ArrayList<ParNode> _parlist, ArrayList<Node> _declist, Node _body) {
+
+	public FunNode (String _id, Type _type, ArrayList<ParNode> _parlist, ArrayList<Node> _declist, ArrayList<Node> _stmlist, Node _exp) {
 		id = _id ;
 		returntype = _type;
 		parlist = _parlist ;
 		declist = _declist ;
-		body = _body ;
+		stmlist = _stmlist;
+		exp = _exp;
+
 	}
+
 
 	public ArrayList<SemanticError> checkSemantics(SymbolTable ST, int _nesting) {
 
@@ -42,7 +46,11 @@ public class FunNode implements Node {
     	  			partypes.add(arg.getType());
     	  			if (ST.top_lookup(arg.getId()))
     	  					errors.add(new SemanticError("Parameter id " + arg.getId() + " already declared")) ;
-    	  			else ST.insert(arg.getId(), arg.getType(), nesting+1, "") ;
+    	  			else {
+						ST.insert(arg.getId(), arg.getType(), nesting + 1, "");
+						STentry tmp = ST.lookup(arg.getId());
+						tmp.setInitialized();
+					}
     	  		}
 
 			type = new ArrowType(partypes, returntype) ;
@@ -51,27 +59,47 @@ public class FunNode implements Node {
 			for (Node dec : declist)
   				errors.addAll(dec.checkSemantics(ST, nesting+1));
 			
-			errors.addAll(body.checkSemantics(ST, nesting+1));
-			ST.remove();
-			
 			flabel = SimpLanlib.freshFunLabel() ;
-			
 			ST.insert(id, type, nesting, flabel) ;
+
+			for (Node stm : stmlist)
+				errors.addAll(stm.checkSemantics(ST, nesting+1));
+
+			if(exp!=null)
+				errors.addAll(exp.checkSemantics(ST, nesting+1));
+
 		}
 		return errors ; // problemi con la generazione di codice!
 	}
   
  	public Type typeCheck () {
-		if (declist!=null) 
-			for (Node dec:declist)
-				dec.typeCheck();
-		if ( (body.typeCheck()).getClass().equals(returntype.getClass())) 
-    			return null ;
-		else {
-			System.out.println("Wrong return type for function "+id);
-			return new ErrorType() ;
-		}  
-  	}
+
+
+		if (declist != null)
+			for(Node innerD: this.declist)
+				innerD.typeCheck();
+		if (stmlist != null)
+			for(Node innerS: this.stmlist)
+				innerS.typeCheck();
+
+		if(returntype instanceof VoidType) {
+			if(exp == null)
+				return new VoidType();
+			else
+			{
+				System.out.println("Wrong return type for function "+id);
+				return new ErrorType() ;
+			}
+		}
+		if(exp!=null) {
+			Type exp_type = exp.typeCheck();
+			if ( (exp.typeCheck().getClass()).equals(returntype.getClass())) {
+				return exp_type;
+			}
+		}
+		System.out.println("Wrong return type for function "+id);
+		return new ErrorType() ;
+	}
   
   public String codeGeneration() {
 	  
@@ -86,7 +114,7 @@ public class FunNode implements Node {
 	    			flabel + ":\n"
 	    			+ "pushr RA \n"
 	    			+ declCode
-	    			+ body.codeGeneration()
+
 	    			+ "addi SP " + 	declist.size() + "\n"
 	    			+ "popr RA \n"
 	    			+ "addi SP " + 	parlist.size() + "\n"
@@ -113,8 +141,8 @@ public class FunNode implements Node {
 	    return s+"Fun:" + id +"\n"
 			   +parlstr 
 		   	   +declstr
-		   	   + "\n" 
-	           +body.toPrint(s+"  ") ; 
+		   	   + "\n" ;
+
 	  }
 	  
 }  
