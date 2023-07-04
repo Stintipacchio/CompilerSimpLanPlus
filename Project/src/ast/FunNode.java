@@ -8,7 +8,7 @@ import semanticanalysis.SemanticError;
 import semanticanalysis.SymbolTable;
 
 public class FunNode implements Node {
-	private String id;
+	private String ID;
 	private Type returntype ; 
 	private ArrayList<ParNode> parlist ; 
 	private ArrayList<Node> declist ;
@@ -19,7 +19,7 @@ public class FunNode implements Node {
 	private String flabel ;
 
 	public FunNode (String _id, Type _type, ArrayList<ParNode> _parlist, ArrayList<Node> _declist, ArrayList<Node> _stmlist, Node _exp) {
-		id = _id ;
+		ID = _id ;
 		returntype = _type;
 		parlist = _parlist ;
 		declist = _declist ;
@@ -34,8 +34,8 @@ public class FunNode implements Node {
 		ArrayList<SemanticError> errors = new ArrayList<SemanticError>();
 		nesting = _nesting ;
 		
-		if (ST.lookup(id) != null)
-			errors.add(new SemanticError("Identifier " + id + " already declared"));
+		if (ST.lookup(ID) != null)
+			errors.add(new SemanticError("Identifier " + ID + " already declared"));
 		else {
 			HashMap<String,STentry> HM = new HashMap<String,STentry>() ;
 			ArrayList<Type> partypes = new ArrayList<Type>() ;
@@ -60,7 +60,7 @@ public class FunNode implements Node {
   				errors.addAll(dec.checkSemantics(ST, nesting+1));
 			
 			flabel = SimpLanlib.freshFunLabel() ;
-			ST.insert(id, type, nesting, flabel) ;
+			ST.insert(ID, type, nesting, flabel) ;
 
 			for (Node stm : stmlist)
 				errors.addAll(stm.checkSemantics(ST, nesting+1));
@@ -87,7 +87,7 @@ public class FunNode implements Node {
 				return new VoidType();
 			else
 			{
-				System.out.println("Wrong return type for function "+id);
+				System.out.println("Wrong return type for function "+ID);
 				return new ErrorType() ;
 			}
 		}
@@ -97,7 +97,7 @@ public class FunNode implements Node {
 				return exp_type;
 			}
 		}
-		System.out.println("Wrong return type for function "+id);
+		System.out.println("Wrong return type for function "+ID);
 		return new ErrorType() ;
 	}
   
@@ -138,7 +138,7 @@ public class FunNode implements Node {
 		if (declist!=null) 
 		  for (Node dec:declist)
 		    declstr+=dec.toPrint(s+" ");
-	    return s+"Fun:" + id +"\n"
+	    return s+"Fun:" + ID +"\n"
 			   +parlstr 
 		   	   +declstr
 		   	   + "\n" ;

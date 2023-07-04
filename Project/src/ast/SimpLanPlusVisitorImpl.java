@@ -32,7 +32,7 @@ public class SimpLanPlusVisitorImpl extends antlr.SimpLanPlusBaseVisitor<Node> {
 			expNode = visit(ctx.exp());
 
 
-		return new ProgNode(decList, "caso2",stmList, expNode);
+		return new ProgNode(expNode, "caso2", decList, stmList);
 	}
 	
 	public Node visitVarDec(SimpLanPlusParser.VarDecContext ctx) {
@@ -80,6 +80,7 @@ public class SimpLanPlusVisitorImpl extends antlr.SimpLanPlusBaseVisitor<Node> {
 		} else {
 			innerExp = null;
 		}
+		System.out.println(ctx.ID().getText() + "AAAAAAAAAAAAAAAAAAAAA");
 		return new FunNode(ctx.ID().getText(), (Type) visit(ctx.type()), _param, innerDec, innerStatements, innerExp);
 	}
 	
@@ -108,7 +109,7 @@ public class SimpLanPlusVisitorImpl extends antlr.SimpLanPlusBaseVisitor<Node> {
 			return new MulDivNode(visit(ctx.e1), visit(ctx.e2), ctx.op.getText());
 	}
 
-	public Node visitAndorExp(SimpLanPlusParser.ExpAndOrContext ctx) {					//AndOr     fatta
+	public Node visitExpAndOr(SimpLanPlusParser.ExpAndOrContext ctx) {					//AndOr     fatta
 
 			return new AndOrNode(visit(ctx.e1), visit(ctx.e2));
 	}
@@ -248,9 +249,10 @@ public class SimpLanPlusVisitorImpl extends antlr.SimpLanPlusBaseVisitor<Node> {
 		if(ctx.ID().getText().equals("print"))
 			res = new PrintNode(args.get(0));
 		
-		else
+		else{
+			System.out.println(ctx.ID().getText() + "BBBBBBBBBB");
 			//instantiate the invocation
-			res = new CallNode(ctx.ID().getText(), args);
+			res = new CallNode(ctx.ID().getText(), args);}
 		
 		return res;
 	}

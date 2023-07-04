@@ -7,7 +7,6 @@ import semanticanalysis.SymbolTable;
 public class DecNode implements Node {
 	private String id;
 	private Node type;
-	private Node exp;
 	private int nesting;
 	
 	public DecNode(String _id, Node _type) {
@@ -19,7 +18,6 @@ public class DecNode implements Node {
 	public ArrayList<SemanticError> checkSemantics(SymbolTable ST, int _nesting) {
    		ArrayList<SemanticError> errors = new ArrayList<SemanticError>();
   		nesting = _nesting ;
-        errors.addAll(exp.checkSemantics(ST, nesting));
         
         if (ST.top_lookup(id) == true) 
         	errors.add(new SemanticError("Var id " + id + " already declared"));
@@ -35,12 +33,12 @@ public class DecNode implements Node {
 	}
   
 	public String codeGeneration() {
-		return exp.codeGeneration() +
+		return
 				"pushr A0 \n" ;
 	}  
     
 	public String toPrint(String s) {
-		return s + "Var:" + id + type.toPrint(" ") + "\n" + exp.toPrint(s+"\t"); 
+		return s + "Var:" + id + type.toPrint(" ") + "\n";
 	}
 
 }  

@@ -1,15 +1,7 @@
-int x;
-int y;
 
 int somma(int a, int b)
 {
-    if(a == 0){
-        b
-    } else {
-    b = b + 1;
-    somma(a-1, b)}
+    a
 }
-x = 21;
-y = x;
 
 somma(x, y);
