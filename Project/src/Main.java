@@ -60,7 +60,7 @@ public class Main {
         antlr.SimpLanPlusLexer lexer2 = new antlr.SimpLanPlusLexer(stream2);
         CommonTokenStream TokenStream = new CommonTokenStream(lexer2);
         SimpLanPlusParser parser = new SimpLanPlusParser(TokenStream);
-        ast.SimpLanPlusVisitorImpl visita_grammatica = new ast.SimpLanPlusVisitorImpl();
+        SimpLanPlusVisitorImpl visita_grammatica = new SimpLanPlusVisitorImpl();
 
         Node albero_grammatica = visita_grammatica.visit(parser.prog());
         SymbolTable symbol_table = new SymbolTable();

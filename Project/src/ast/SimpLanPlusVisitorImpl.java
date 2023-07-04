@@ -5,7 +5,7 @@ import parser.SimpLanParser.*;
 import antlr.SimpLanPlusParser;
 import java.util.ArrayList;
 
-public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
+public class SimpLanPlusVisitorImpl extends antlr.SimpLanPlusBaseVisitor<Node> {
 	
 
 	public Node visitSingleExp(SimpLanPlusParser.SingleExpContext ctx) {
@@ -15,7 +15,7 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 		
 	}
 
-	public Node visitDecstmExp(SimpLanPlusParser.MultipleExpContext ctx) {
+	public Node visitMultipleExp(SimpLanPlusParser.MultipleExpContext ctx) {
 
 		ArrayList<Node> decList = new ArrayList<Node>();
 		ArrayList<Node> stmList = new ArrayList<Node>();
@@ -35,7 +35,7 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 		return new ProgNode(decList, "caso2",stmList, expNode);
 	}
 	
-	public Node visitId(SimpLanPlusParser.VarDecContext ctx) {
+	public Node visitVarDec(SimpLanPlusParser.VarDecContext ctx) {
 		//visit the type
 		Node typeNode = visit(ctx.type());
 		
@@ -92,7 +92,7 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 
 	}
 	//da capire forse si puo togliere il controllo sulla simple expression
-	public Node visitExp(SimpLanPlusParser.ExpPlusMinusContext ctx) {
+	public Node visitExpPlusMinus(SimpLanPlusParser.ExpPlusMinusContext ctx) {
 		if(ctx.e2 == null){ //it is a simple expression
 			return visit( ctx.e1 );
 		} else { //it is a binary expression: visit left and right
@@ -100,7 +100,7 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 		}
 	}
 	
-	public Node visitTerm(SimpLanPlusParser.ExpMulDivContext ctx) {
+	public Node visitExpMulDiv(SimpLanPlusParser.ExpMulDivContext ctx) {
 		if(ctx.e2 == null){ //it is a simple expression
 			return visit( ctx.e1 );
 		} else
@@ -113,12 +113,12 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 			return new AndOrNode(visit(ctx.e1), visit(ctx.e2));
 	}
 
-	public Node visitNotExp(SimpLanPlusParser.ExpNotIdContext ctx) {				//Not
+	public Node visitExpNotId(SimpLanPlusParser.ExpNotIdContext ctx) {				//Not
 		return new NotNode(visit(ctx.exp()));
 	}
 
 
-	public Node visitFactor(SimpLanPlusParser.ExpReopContext ctx) {
+	public Node visitExpReop(SimpLanPlusParser.ExpReopContext ctx) {
 		if(ctx.e2 == null){ //it is a simple expression
 			return visit( ctx.e1 );
 		}else{ //it is a binary expression, you should visit left and right
@@ -126,26 +126,26 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 		}
 	}
 
-	public Node visitIntVal(SimpLanPlusParser.ExpIntContext ctx) {
+	public Node visitExpInt(SimpLanPlusParser.ExpIntContext ctx) {
 		// notice that this method is not actually a rule but a named production #intVal		
 		//there is no need to perform a check here, the lexer ensures this text is an int
 		return new IntNode(Integer.parseInt(ctx.INTEGER().getText()));
 	}
 
-	public Node visitTrueExp(SimpLanPlusParser.ExpTrueContext ctx) {
+	public Node visitExpTrue(SimpLanPlusParser.ExpTrueContext ctx) {
 
 		return new BoolNode(Boolean.parseBoolean("true"));
 	}
-	public Node visitTrueExp(SimpLanPlusParser.ExpFalseContext ctx) {
+	public Node visitExpFalse(SimpLanPlusParser.ExpFalseContext ctx) {
 
 		return new BoolNode(Boolean.parseBoolean("false"));
 	}
 
-	public Node visitBaseExp(SimpLanPlusParser.ExpBracketContext ctx) {
+	public Node visitExpBracket(SimpLanPlusParser.ExpBracketContext ctx) {
 		return visit (ctx.exp());
 	}
 	
-	public Node visitIfExp(SimpLanPlusParser.ExpIfContext ctx) {
+	public Node visitExpIf(SimpLanPlusParser.ExpIfContext ctx) {
 		//visit the conditional, then the then branch, and then the else branch
 		//notice once again the need of named terminals in the rule, this is because
 		//we need to point to the right expression among the 3 possible ones in the rule
@@ -158,7 +158,7 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 
 		return new IfNode(condExp, thenExp, elseExp);
 	}
-	public Node visitBlockseqstmexp(SimpLanPlusParser.ExpThenBranchContext ctx) {			//Blocco rami dell'ifExp
+	public Node visitExpThenBranch(SimpLanPlusParser.ExpThenBranchContext ctx) {			//Blocco rami dell'ifExp
 		ArrayList<Node> stmList = new ArrayList<Node>();
 		Node expNode = null;
 
@@ -170,7 +170,7 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 
 		return new SeqstmNode(stmList, "exp", expNode);
 	}
-	public Node visitBlockseqstmexp(SimpLanPlusParser.ExpElseBranchContext ctx) {			//Blocco rami dell'ifExp
+	public Node visitExpElseBranch(SimpLanPlusParser.ExpElseBranchContext ctx) {			//Blocco rami dell'ifExp
 		ArrayList<Node> stmList = new ArrayList<Node>();
 		Node expNode = null;
 
@@ -185,7 +185,7 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 
 
 
-	public Node visitIfStm(SimpLanPlusParser.StmIfContext ctx) {
+	public Node visitStmIf(SimpLanPlusParser.StmIfContext ctx) {
 		//visit the conditional, then the then branch, and then the else branch
 		//notice once again the need of named terminals in the rule, this is because
 		//we need to point to the right expression among the 3 possible ones in the rule
@@ -201,14 +201,14 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 		return new IfNode(condExp, thenExp, elseExp);
 	}
 
-	public Node visitBlockseqstm(SimpLanPlusParser.StmThenBranchContext ctx) {					//Blocco rami dell'ifStm
+	public Node visitStmThenBranch(SimpLanPlusParser.StmThenBranchContext ctx) {					//Blocco rami dell'ifStm
 		ArrayList<Node> stmList = new ArrayList<Node>();
 		for (SimpLanPlusParser.StmContext sc : ctx.stm())
 			stmList.add(visit(sc));
 
 		return new SeqstmNode(stmList, "stm");
 	}
-	public Node visitBlockseqstm(SimpLanPlusParser.StmElseBranchContext ctx) {					//Blocco rami dell'ifStm
+	public Node visitStmElseBranch(SimpLanPlusParser.StmElseBranchContext ctx) {					//Blocco rami dell'ifStm
 		ArrayList<Node> stmList = new ArrayList<Node>();
 		for (SimpLanPlusParser.StmContext sc : ctx.stm())
 			stmList.add(visit(sc));
@@ -219,13 +219,13 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 
 
 
-	public Node visitVarExp(SimpLanPlusParser.ExpIdContext ctx) {
+	public Node visitExpId(SimpLanPlusParser.ExpIdContext ctx) {
 		//this corresponds to a variable access
 		return new IdNode(ctx.ID().getText());
 	}
 
 
-	public Node visitVarStm(SimpLanPlusParser.StmAsgContext ctx) {			//VarStm: assegnamento    da modificare file varstmnode
+	public Node visitStmAsg(SimpLanPlusParser.StmAsgContext ctx) {			//VarStm: assegnamento    da modificare file varstmnode
 		//visit the exp
 		Node expNode = visit(ctx.exp());
 
@@ -233,7 +233,7 @@ public class SimpLanPlusVisitorImpl extends SimpLanBaseVisitor<Node> {
 		return new VarStmNode(ctx.ID().getText(), expNode);
 	}
 	
-	public Node visitFunExp(SimpLanPlusParser.ExpCallFunContext ctx) {
+	public Node visitExpCallFun(SimpLanPlusParser.ExpCallFunContext ctx) {
 		//this corresponds to a function invocation
 		//declare the result
 		Node res;
