@@ -1,4 +1,4 @@
-// Generated from C:/Users/stint/Desktop/CLP-Project/Project/src\SimpLanPlus.g4 by ANTLR 4.12.0
+// Generated from C:/Users/stint/Desktop/CompilerSimpLanPlus/Project/src\SimpLanPlus.g4 by ANTLR 4.12.0
 package antlr;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
