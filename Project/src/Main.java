@@ -18,7 +18,9 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        String input = new String(Files.readAllBytes(Paths.get("C:\\Users\\stint\\Desktop\\CompilerSimpLanPlus\\Project\\src\\input.txt")));
+        File inputFile = new File("./src/input.txt");
+
+        String input = new String(Files.readAllBytes(Paths.get(inputFile.getAbsolutePath())));
 
         //Exercise 1
         CharStream stream = CharStreams.fromString(input);
