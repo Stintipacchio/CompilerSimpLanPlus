@@ -250,10 +250,31 @@ public class SimpLanPlusVisitorImpl extends antlr.SimpLanPlusBaseVisitor<Node> {
 			res = new PrintNode(args.get(0));
 		
 		else{
-			System.out.println(ctx.ID().getText() + "BBBBBBBBBB");
 			//instantiate the invocation
 			res = new CallNode(ctx.ID().getText(), args);}
 		
+		return res;
+	}
+
+	public Node visitStmCallFun(SimpLanPlusParser.StmCallFunContext ctx) {
+		//this corresponds to a function invocation
+		//declare the result
+		Node res;
+
+		//get the invocation arguments
+		ArrayList<Node> args = new ArrayList<Node>();
+
+		for (SimpLanPlusParser.ExpContext exp : ctx.exp())
+			args.add(visit(exp));
+
+		// this is ad-hoc for this project...
+		if(ctx.ID().getText().equals("print"))
+			res = new PrintNode(args.get(0));
+
+		else{
+			//instantiate the invocation
+			res = new CallNode(ctx.ID().getText(), args);}
+
 		return res;
 	}
 	
