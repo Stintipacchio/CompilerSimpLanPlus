@@ -50,16 +50,16 @@ public class RelationalOperatorNode implements Node {
 			default -> "";
 		};
 
-		return this.left.codeGeneration()+
-				"pushr A0 \n"+
-				this.right.codeGeneration()+
-				"popr T1 \n"+
-				command+
-				"storei A0 0 \n"+
-				"b " + lend + "\n" +
-				ltrue + ":\n"+
-				"storei A0 1 \n"+
-				lend + ":\n";
+		return this.left.codeGeneration()
+				+ "pushr A0 \n"
+				+ this.right.codeGeneration()
+				+ "popr T1 \n"
+				+ command
+				+ "storei A0 0 \n"
+				+ "b " + lend + "\n"
+				+ ltrue + ":\n"
+				+ "storei A0 1 \n"
+				+ lend + ":\n";
 
 	}
 

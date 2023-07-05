@@ -62,14 +62,14 @@ public class IfNode implements Node {
   	public String codeGeneration() {
   		String lthen = SimpLanlib.freshLabel(); 
   		String lend = SimpLanlib.freshLabel();
-  		return guard.codeGeneration() +
-			 "storei T1 1 \n" +
-			 "beq A0 T1 "+ lthen + "\n" +			  
-			 elsebranch.codeGeneration() +
-			 "b " + lend + "\n" +
-			 lthen + ":\n" +
-			 thenbranch.codeGeneration() +
-	         lend + ":\n" ; 
+  		return guard.codeGeneration()
+			 + "storei T1 1 \n"
+			 + "beq A0 T1 "+ lthen + "\n"
+			 + elsebranch.codeGeneration()
+			 + "b " + lend + "\n"
+			 + lthen + ":\n"
+			 + thenbranch.codeGeneration()
+	         + lend + ":\n" ;
   	}
 
   	public String toPrint(String s) {

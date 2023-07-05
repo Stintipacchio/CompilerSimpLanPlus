@@ -41,31 +41,31 @@ public class AndOrNode implements Node {
 		if (Op.equals("&&")) {
 			String ltrue = SimpLanlib.freshLabel();
 			String lend = SimpLanlib.freshLabel();
-			code = left.codeGeneration()+
-					"push 0 \n"+
-					"popr T1 \n"+
-					"beq A0 T1 "+lend+"\n"+
-					right.codeGeneration()+
-					lend+ ":\n";
+			code = left.codeGeneration()
+					+ "push 0 \n"
+					+ "popr T1 \n"
+					+ "beq A0 T1 "+lend+"\n"
+					+ right.codeGeneration()
+					+ lend+ ":\n";
 		} else {
 			String ltrue = SimpLanlib.freshLabel();
 			String lend = SimpLanlib.freshLabel();
-			code = left.codeGeneration()+
-					"pushr A0 \n" +
-					right.codeGeneration()+
-					"popr T1 \n" +
-					"add A0 T1 \n"+
-					"popr A0 \n"+
-					"push 1 \n"+
-					"popr T1 \n"+
-					"bgte A0 T1 "+ltrue+"\n"+
-					"push 0 \n"+
-					"popr A0 \n"+
-					"b "+lend+"\n"+
-					ltrue+ ":\n" +
-					"push 1 \n"+
-					"popr A0 \n"+
-					lend+ ":\n";
+			code = left.codeGeneration()
+					+ "pushr A0 \n"
+					+ right.codeGeneration()
+					+ "popr T1 \n"
+					+ "add A0 T1 \n"
+					+ "popr A0 \n"
+					+ "push 1 \n"
+					+ "popr T1 \n"
+					+ "bgte A0 T1 "+ltrue+"\n"
+					+ "push 0 \n"
+					+ "popr A0 \n"
+					+ "b "+lend+"\n"
+					+ ltrue+ ":\n"
+					+ "push 1 \n"
+					+ "popr A0 \n"
+					+ lend+ ":\n";
 		}
 
 		return code;

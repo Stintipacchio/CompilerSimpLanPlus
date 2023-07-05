@@ -35,14 +35,14 @@ public class NotNode implements Node {
 	public String codeGeneration() {
 		String lfalse = SimpLanlib.freshLabel();
 		String lexit = SimpLanlib.freshLabel();
-		return	ctx.codeGeneration()+
-				"storei T1 0 \n"+
-				"beq A0 T1 " + lfalse + "\n"+
-				"storei A0 0\n" +
-				"b " + lexit + "\n"+
-				lfalse + ":\n"+
-				"storei A0 1\n" +
-				lexit + ":\n";
+		return	ctx.codeGeneration()
+				+ "storei T1 0 \n"
+				+ "beq A0 T1 " + lfalse + "\n"
+				+ "storei A0 0\n"
+				+ "b " + lexit + "\n"
+				+ lfalse + ":\n"
+				+ "storei A0 1\n"
+				+ lexit + ":\n";
 	}
    
 	public String toPrint(String s) {
