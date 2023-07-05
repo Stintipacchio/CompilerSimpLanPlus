@@ -80,7 +80,6 @@ public class SimpLanPlusVisitorImpl extends antlr.SimpLanPlusBaseVisitor<Node> {
 		} else {
 			innerExp = null;
 		}
-		System.out.println(ctx.ID().getText() + "AAAAAAAAAAAAAAAAAAAAA");
 		return new FunNode(ctx.ID().getText(), (Type) visit(ctx.type()), _param, innerDec, innerStatements, innerExp);
 	}
 	
@@ -157,7 +156,7 @@ public class SimpLanPlusVisitorImpl extends antlr.SimpLanPlusBaseVisitor<Node> {
 
 		Node elseExp = visit (ctx.elseBranch);
 
-		return new IfNode(condExp, thenExp, elseExp);
+		return new IfNode(condExp, thenExp, elseExp, "caso1");
 	}
 	public Node visitExpThenBranch(SimpLanPlusParser.ExpThenBranchContext ctx) {			//Blocco rami dell'ifExp
 		ArrayList<Node> stmList = new ArrayList<Node>();
@@ -199,7 +198,7 @@ public class SimpLanPlusVisitorImpl extends antlr.SimpLanPlusBaseVisitor<Node> {
 		if(ctx.stmElseBranch()!=null)
 			elseExp = visit (ctx.elseBranch);
 
-		return new IfNode(condExp, thenExp, elseExp);
+		return new IfNode(condExp, thenExp, elseExp, "caso2");
 	}
 
 	public Node visitStmThenBranch(SimpLanPlusParser.StmThenBranchContext ctx) {					//Blocco rami dell'ifStm
@@ -229,7 +228,6 @@ public class SimpLanPlusVisitorImpl extends antlr.SimpLanPlusBaseVisitor<Node> {
 	public Node visitStmAsg(SimpLanPlusParser.StmAsgContext ctx) {			//VarStm: assegnamento    da modificare file varstmnode
 		//visit the exp
 		Node expNode = visit(ctx.exp());
-
 
 		return new VarStmNode(ctx.ID().getText(), expNode);
 	}

@@ -29,7 +29,7 @@ public class MulDivNode implements Node {
 		if ((left.typeCheck() instanceof IntType) && (right.typeCheck() instanceof IntType) ) 
 		  return new IntType() ;
 		else {
-		  System.out.println("Type Error: Non integers in multiplication") ;
+		  System.out.println("Type Error: Non integers in multiplication or division") ;
 		  return new ErrorType() ;
 		}
 	}  

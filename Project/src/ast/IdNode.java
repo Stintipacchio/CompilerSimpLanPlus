@@ -31,7 +31,12 @@ public class IdNode implements Node {
 		if (type.gettype() instanceof ArrowType) { //
 			System.out.println("Wrong usage of function identifier");
 			return new ErrorType() ;
-		} else return type.gettype() ;
+		}else if (type.getInitialized()==false) {
+			System.out.println("Type Error: Var '"+id+"' not initialized");
+			return new ErrorType() ;
+		}
+		else
+			return type.gettype() ;
 	}
   
 	public String codeGeneration() {

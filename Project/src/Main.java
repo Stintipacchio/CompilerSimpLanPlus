@@ -1,4 +1,5 @@
 import antlr.SimpLanPlusParser;
+import ast.ErrorType;
 import ast.Node;
 import org.antlr.v4.runtime.*;
 
@@ -55,6 +56,7 @@ public class Main {
         //analisi sintattica
 
 
+
         //Exercise 2-3
         CharStream stream2 = CharStreams.fromString(input);
         antlr.SimpLanPlusLexer lexer2 = new antlr.SimpLanPlusLexer(stream2);
@@ -67,8 +69,25 @@ public class Main {
         int offset = 0;
         ArrayList<SemanticError> errors = albero_grammatica.checkSemantics(symbol_table, offset);
 
+        System.out.println("AAAAAAAAAAAA  checksemantic è sbagliata, nell assegnamento non setta la variabile initialized a true");
+        if(errors.size()>0){
+            System.out.println("You had " + errors.size() + " errors:");
+            for(SemanticError e : errors) {
+                System.out.println("\t" + e);
+            }
+
+        }
 
 
+        System.out.println("BBBBBBBBBBBBBBBBB");
+        Node type = (Node)albero_grammatica.typeCheck(); //type-checking bottom-up
+        if (type instanceof ErrorType)
+            System.out.println("Type checking is WRONG!");
+        else {
+            System.out.println("CheckSemantic ok!");
+            System.out.println("Type checking ok!\n");
+            System.out.println("Symbol Table: \n" + symbol_table.toPrint());
+        }
     }
 }
 

@@ -25,9 +25,9 @@ public class VarStmNode implements Node {
    		ArrayList<SemanticError> errors = new ArrayList<SemanticError>();
   		nesting = _nesting ;
   		T = ST.lookup(id);
-  		
-  		
-        if (T == null) 
+		initialized = true;
+
+		if (T == null)
         	errors.add(new SemanticError("Variabile '" + id + "' non è stata dichiarata"));
         
         errors.addAll(exp.checkSemantics(ST, nesting));
@@ -50,19 +50,16 @@ public class VarStmNode implements Node {
 			
 			return new ErrorType() ;
 		}
-		
 		if (expvar.getClass().equals(type.getClass() )) {
 			
 			//T.setInitialized();    // cambiato dalla versione di ga. vedere se T è accessibile da altre parti
 			initialized = true;
 			return new VoidType() ;
 		}
-			
 		else {
 			System.out.println("Type Error: incompatible type of expression for variable "+id) ;
 			return new ErrorType() ;
 		}
-		    
 	}
   
 	public String codeGeneration() {

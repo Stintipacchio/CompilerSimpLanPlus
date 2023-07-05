@@ -88,4 +88,8 @@ public class SymbolTable {
 		offset.add(offs) ;	
 	}
 
+	public String toPrint() {
+
+		return "";
+	}
 }

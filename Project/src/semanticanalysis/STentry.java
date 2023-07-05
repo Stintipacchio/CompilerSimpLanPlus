@@ -7,7 +7,6 @@ public class STentry {
 	private int offset ;
 	private int nesting ;
 	private String label ;
-
 	private boolean initialized;        //   da verificare
 
 	
@@ -39,6 +38,8 @@ public class STentry {
 	public void setInitialized() {
 		initialized = true;
 	}
+
+	public boolean getInitialized() {return initialized;}
 
 
 }
