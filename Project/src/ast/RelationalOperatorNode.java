@@ -38,39 +38,29 @@ public class RelationalOperatorNode implements Node {
 	}  
 
 	public String codeGeneration() {
-		String code = "";
+		String ltrue = SimpLanlib.freshLabel();
+		String lend = SimpLanlib.freshLabel();
 
-		if (Op.equals("&&")) {
-			String ltrue = SimpLanlib.freshLabel();
-			String lend = SimpLanlib.freshLabel();
-			code = left.codeGeneration()+
-					"push 0 \n"+
-					"popr T1 \n"+
-					"beq A0 T1 "+lend+"\n"+
-					right.codeGeneration()+
-					lend+ ":\n";
-		} else {
-			String ltrue = SimpLanlib.freshLabel();
-			String lend = SimpLanlib.freshLabel();
-			code = left.codeGeneration()+
-					"pushr A0 \n" +
-					right.codeGeneration()+
-					"popr T1 \n" +
-					"add A0 T1 \n"+
-					"popr A0 \n"+
-					"push 1 \n"+
-					"popr T1 \n"+
-					"bgte A0 T1 "+ltrue+"\n"+
-					"push 0 \n"+
-					"popr A0 \n"+
-					"b "+lend+"\n"+
-					ltrue+ ":\n" +
-					"push 1 \n"+
-					"popr A0 \n"+
-					lend+ ":\n";
-		}
+		String command = switch (this.Op) {
+			case ">" -> "bgt T1 A0 "+ltrue+"\n";
+			case "<" -> "blt T1 A0 "+ltrue+"\n";
+			case ">=" -> "bgte T1 A0 "+ltrue+"\n";
+			case "<=" -> "bleq T1 A0 "+ltrue+"\n";
+			case "==" -> "beq T1 A0 "+ltrue+"\n";
+			default -> "";
+		};
 
-		return code;
+		return this.left.codeGeneration()+
+				"pushr A0 \n"+
+				this.right.codeGeneration()+
+				"popr T1 \n"+
+				command+
+				"storei A0 0 \n"+
+				"b " + lend + "\n" +
+				ltrue + ":\n"+
+				"storei A0 1 \n"+
+				lend + ":\n";
+
 	}
 
 	public String toPrint(String s) {

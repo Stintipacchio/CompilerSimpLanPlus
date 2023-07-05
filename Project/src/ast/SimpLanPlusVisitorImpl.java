@@ -110,7 +110,7 @@ public class SimpLanPlusVisitorImpl extends antlr.SimpLanPlusBaseVisitor<Node> {
 
 	public Node visitExpAndOr(SimpLanPlusParser.ExpAndOrContext ctx) {					//AndOr     fatta
 
-			return new AndOrNode(visit(ctx.e1), visit(ctx.e2));
+			return new AndOrNode(visit(ctx.e1), visit(ctx.e2), ctx.op.getText());
 	}
 
 	public Node visitExpNotId(SimpLanPlusParser.ExpNotIdContext ctx) {				//Not
