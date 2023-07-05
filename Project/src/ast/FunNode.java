@@ -105,16 +105,29 @@ public class FunNode implements Node {
 	  
 	    String declCode = "" ;
 	    if (declist.size() != 0) {
-	    		for (Node dec:declist){
-	    			declCode = declCode + dec.codeGeneration();
-	    		}
+			for (Node dec:declist){
+				declCode = declCode + dec.codeGeneration();
+			}
  	    }
+
+		String innerStmCode = "";
+		if (stmlist != null) {
+			for (Node innerS : this.stmlist) {
+				innerStmCode += innerS.codeGeneration();
+			}
+		}
+
+		String innerExpCode = "";
+		if (exp != null) {
+			innerExpCode += exp.codeGeneration();
+		}
 	     
 	    SimpLanlib.putCode(
 	    			flabel + ":\n"
 	    			+ "pushr RA \n"
 	    			+ declCode
-
+					+ innerStmCode
+					+ innerExpCode
 	    			+ "addi SP " + 	declist.size() + "\n"
 	    			+ "popr RA \n"
 	    			+ "addi SP " + 	parlist.size() + "\n"

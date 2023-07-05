@@ -36,13 +36,14 @@ public class PlusMinusNode implements Node {
 	  
   
 	public String codeGeneration() {
-		return left.codeGeneration()+
-			   "pushr A0 \n" +
-			   right.codeGeneration()+
-			   "popr T1 \n" +
-			   "add A0 T1 \n" +
-			   "popr A0 \n" ;
-	}
+		return left.codeGeneration()
+			+"pushr A0 \n"
+			+right.codeGeneration()
+			+"popr T1 \n" 
+			+"add A0 T1 \n"
+			+(Op.equals("+") ? "add T1 A0 \n" : "sub T1 A0 \n")
+			+"popr A0 \n" ;
+}
    
 	public String toPrint(String s) {
 	    return s+"Plus\n" + left.toPrint(s+"  ") + right.toPrint(s+"  ") ; 

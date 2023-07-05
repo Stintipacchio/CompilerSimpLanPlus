@@ -35,12 +35,12 @@ public class MulDivNode implements Node {
 	}  
   
     public String codeGeneration() {
-		return 		left.codeGeneration()
-				   + "pushr A0 \n"
-				   + right.codeGeneration()
-				   + "popr T1 \n"
-				   + "mul A0 T1 \n" 
-				   + "popr A0 \n";
+		return 	left.codeGeneration()
+				+ "pushr A0 \n"
+				+ right.codeGeneration()
+				+ "popr T1 \n"
+				+ (Op.equals("*") ? "mul T1 A0 \n" : "div T1 A0 \n")
+				+ "popr A0 \n";
     }
 
     public String toPrint(String s) {
