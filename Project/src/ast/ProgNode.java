@@ -76,7 +76,24 @@ public class ProgNode implements Node {
 	}  
   
 	public String codeGeneration() {
-		return exp.codeGeneration()+"halt\n";
+		String decCode="";
+		if (listDec != null)
+			for (Node d: listDec)
+				decCode += d.codeGeneration();
+
+		String stmCode="";
+		if(listStm != null)
+			for (Node s: listStm)
+				stmCode += s.codeGeneration();
+		return  "move SP FP \n"
+				+ "pushr FP \n"
+				+ "move SP AL \n"
+				+ "pushr AL \n"
+				+ decCode
+				+ stmCode
+				+ (exp != null ? exp.codeGeneration() : "")
+				+ "halt\n" +
+				evaluator.SimpLanlib.getCode();
 	}  
   
 	public String toPrint(String s) {

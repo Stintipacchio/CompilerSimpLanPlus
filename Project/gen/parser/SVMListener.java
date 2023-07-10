@@ -1,5 +1,7 @@
-// Generated from C:/Users/stint/Desktop/CLP-Project/Project/src\SVM.g4 by ANTLR 4.12.0
-package SVM;
+// Generated from C:/Users/stint/Desktop/CompilerSimpLanPlus/Project/src\SVM.g4 by ANTLR 4.12.0
+package parser;
+
+import java.util.HashMap;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 

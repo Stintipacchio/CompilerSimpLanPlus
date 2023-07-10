@@ -1,6 +1,7 @@
-int a;
-     void h(int n){
-  	  int x ; int y ;
-          if (n==0){ x = n+1 ;} else { h(n-1) ; y = x ;}
-     }
-     h(5) ;
+int x;
+
+int f(int d){
+    if (d==4) { x = d - 3; } else { x = d * 4;}
+}
+
+f(5);

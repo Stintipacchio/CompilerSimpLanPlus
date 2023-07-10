@@ -1,4 +1,4 @@
-// Generated from SVM.g4 by ANTLR 4.6
+// Generated from C:/Users/stint/Desktop/CompilerSimpLanPlus/Project/src\SVM.g4 by ANTLR 4.12.0
 package parser;
 
 import java.util.HashMap;
@@ -13,6 +13,7 @@ import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
+@SuppressWarnings("CheckReturnValue")
 public class SVMBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements SVMVisitor<T> {
 	/**
 	 * {@inheritDoc}

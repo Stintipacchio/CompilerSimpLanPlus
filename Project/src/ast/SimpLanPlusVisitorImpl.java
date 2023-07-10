@@ -1,7 +1,7 @@
 package ast;
 
-import parser.SimpLanBaseVisitor;
-import parser.SimpLanParser.*;
+import antlr.SimpLanPlusBaseVisitor;
+import antlr.SimpLanPlusParser.*;
 import antlr.SimpLanPlusParser;
 import java.util.ArrayList;
 
