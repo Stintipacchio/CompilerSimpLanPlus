@@ -38,8 +38,14 @@ public class STentry {
 	public void setInitialized() {
 		initialized = true;
 	}
+	public void setInitialized(boolean set_initialized) {
+		initialized = set_initialized;
+	}
 
 	public boolean getInitialized() {return initialized;}
+	public void setLabel(String label) {
+		this.label = label;
+	}
 
 
 }

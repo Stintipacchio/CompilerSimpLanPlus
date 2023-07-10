@@ -57,9 +57,8 @@ public class Main {
             String toWrite = "Errore " + i + 1 + ": Linea " + errLine + ", carattere numero " + errPos + " -> " + errStr + "\n";
             Files.write(Paths.get("out/errors.txt"), toWrite.getBytes(), StandardOpenOption.APPEND);
         }
+
         //analisi sintattica
-
-
 
         //Exercise 2-3
         CharStream stream2 = CharStreams.fromString(input);

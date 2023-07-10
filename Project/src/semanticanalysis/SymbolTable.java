@@ -94,4 +94,35 @@ public class SymbolTable {
 	}
 
 
+	public SymbolTable copy() {
+		SymbolTable newSymbolTable = new SymbolTable();
+		ArrayList<HashMap<String,STentry>>  st = new ArrayList<HashMap<String,STentry>>() ;
+		ArrayList<Integer> list_integer =  new ArrayList<Integer>() ;
+
+		for (HashMap<String, STentry> hashMap : symbol_table) {
+			HashMap<String, STentry> newHashMap = new HashMap<>();
+			for (String key : hashMap.keySet()) {
+				STentry oldSTEntry = hashMap.get(key);
+				STentry newSTEntry = new STentry(oldSTEntry.gettype(), oldSTEntry.getoffset(), oldSTEntry.getnesting());
+				newSTEntry.setLabel(oldSTEntry.getlabel());
+				newSTEntry.setInitialized(oldSTEntry.getInitialized());
+				newHashMap.put(key, newSTEntry);
+			}
+			st.add(newHashMap);
+		}
+
+		for (int i : offset) {
+			list_integer.add(i);
+		}
+
+		newSymbolTable.setPar(st, list_integer);
+
+		return newSymbolTable;
+	}
+
+	public void setPar(ArrayList<HashMap<String,STentry>>  st , ArrayList<Integer> _list_integer) {
+		symbol_table = st;
+		offset = _list_integer;
+	}
+
 }

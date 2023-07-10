@@ -24,12 +24,12 @@ public class IfNode implements Node {
 		ArrayList<SemanticError> errors = new ArrayList<SemanticError>();
 
 
-		//SymbolTable ST1 = ST.copy();
-		//SymbolTable ST2 = ST.copy();
+		SymbolTable ST1 = ST.copy();
+		SymbolTable ST2 = ST.copy();
 
 		errors.addAll(guard.checkSemantics(ST, _nesting));
-		errors.addAll(thenbranch.checkSemantics(ST, _nesting));
-		errors.addAll(elsebranch.checkSemantics(ST, _nesting));
+		errors.addAll(thenbranch.checkSemantics(ST1, _nesting));
+		errors.addAll(elsebranch.checkSemantics(ST2, _nesting));
 
 		return errors;
 	}
