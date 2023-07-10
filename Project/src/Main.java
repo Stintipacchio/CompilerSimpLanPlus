@@ -1,6 +1,8 @@
 import antlr.SimpLanPlusParser;
 import ast.ErrorType;
 import ast.Node;
+import ast.SVMVisitorImpl;
+import evaluator.ExecuteVM;
 import org.antlr.v4.runtime.*;
 
 import java.io.*;
@@ -10,6 +12,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import ast.SimpLanPlusVisitorImpl;
+import parser.SVMLexer;
+import parser.SVMParser;
 import semanticanalysis.SymbolTable;
 import semanticanalysis.SemanticError;
 
@@ -69,7 +73,7 @@ public class Main {
         int offset = 0;
         ArrayList<SemanticError> errors = albero_grammatica.checkSemantics(symbol_table, offset);
 
-        System.out.println("AAAAAAAAAAAA  checksemantic è sbagliata, nell assegnamento non setta la variabile initialized a true");
+
         if(errors.size()>0){
             System.out.println("You had " + errors.size() + " errors:");
             for(SemanticError e : errors) {
@@ -79,8 +83,9 @@ public class Main {
         }
 
 
-        System.out.println("BBBBBBBBBBBBBBBBB");
+
         Node type = (Node)albero_grammatica.typeCheck(); //type-checking bottom-up
+
         if (type instanceof ErrorType)
             System.out.println("Type checking is WRONG!");
         else {
@@ -88,6 +93,33 @@ public class Main {
             System.out.println("Type checking ok!\n");
             System.out.println("Symbol Table: \n" + symbol_table.toPrint());
         }
+
+
+
+
+        String code=albero_grammatica.codeGeneration();
+        BufferedWriter out = new BufferedWriter(new FileWriter("prova.asm"));
+        out.write(code);
+        out.close();
+        System.out.println("Code generated! Assembling and running generated code.");
+
+        FileInputStream isASM = new FileInputStream("prova.asm");
+        ANTLRInputStream inputASM = new ANTLRInputStream(isASM);
+        SVMLexer lexerASM = new SVMLexer(inputASM);
+        CommonTokenStream tokensASM = new CommonTokenStream(lexerASM);
+        SVMParser parserASM = new SVMParser(tokensASM);
+
+        //parserASM.assembly();
+
+        SVMVisitorImpl visitorSVM = new SVMVisitorImpl();
+        visitorSVM.visit(parserASM.assembly());
+
+        //System.out.println("You had: "+lexerASM.lexicalErrors+" lexical errors and "+parserASM.getNumberOfSyntaxErrors()+" syntax errors.");
+        //if (lexerASM.lexicalErrors>0 || parserASM.getNumberOfSyntaxErrors()>0) System.exit(1);
+
+        System.out.println("Starting Virtual Machine...");
+        ExecuteVM vm = new ExecuteVM(visitorSVM.code);
+        vm.cpu();
     }
 }
 

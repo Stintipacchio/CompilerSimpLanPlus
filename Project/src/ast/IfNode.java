@@ -16,11 +16,16 @@ public class IfNode implements Node {
 		guard = _guard;
 		thenbranch = _thenbranch;
 		elsebranch = _elsebranch;
+		tipo_if = _tipo_if;
 	}
 
 	@Override
 	public ArrayList<SemanticError> checkSemantics(SymbolTable ST, int _nesting) {
 		ArrayList<SemanticError> errors = new ArrayList<SemanticError>();
+
+
+		//SymbolTable ST1 = ST.copy();
+		//SymbolTable ST2 = ST.copy();
 
 		errors.addAll(guard.checkSemantics(ST, _nesting));
 		errors.addAll(thenbranch.checkSemantics(ST, _nesting));
@@ -31,7 +36,7 @@ public class IfNode implements Node {
 
 	public Type typeCheck() {
 		if (guard.typeCheck() instanceof BoolType) {
-			if (tipo_if.equals("cose1")) {
+			if (tipo_if.equals("caso1")) {
 				Type thenexp = thenbranch.typeCheck();
 				Type elseexp = elsebranch.typeCheck();
 				if (thenexp.getClass().equals(elseexp.getClass()))
@@ -40,7 +45,7 @@ public class IfNode implements Node {
 					System.out.println("Type Error: incompatible types in then and else branches");
 					return new ErrorType();
 				}
-			} else if (tipo_if.equals("cose2")) {
+			} else if (tipo_if.equals("caso2")) {
 				Type thenexp = thenbranch.typeCheck();
 				if (elsebranch != null) {
 					Type elseexp = elsebranch.typeCheck();

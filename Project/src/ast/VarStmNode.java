@@ -25,13 +25,14 @@ public class VarStmNode implements Node {
    		ArrayList<SemanticError> errors = new ArrayList<SemanticError>();
   		nesting = _nesting ;
   		T = ST.lookup(id);
-		initialized = true;
+		T.setInitialized();
 
 		if (T == null)
         	errors.add(new SemanticError("Variabile '" + id + "' non è stata dichiarata"));
         
         errors.addAll(exp.checkSemantics(ST, nesting));
-        
+
+
         if (T!=null){   //non so casa faccia
         	    	
         	id_offset = T.getoffset();
@@ -41,6 +42,7 @@ public class VarStmNode implements Node {
         	//Ad-hoc per l'assegnamento! Caso particolare nell'if da gestire così a causa di copia SymbolTable
         	this.typeCheck();   //perchè fa la typecheck qui?
         }
+
         return errors ;
 	}
   
@@ -51,8 +53,7 @@ public class VarStmNode implements Node {
 			return new ErrorType() ;
 		}
 		if (expvar.getClass().equals(type.getClass() )) {
-			
-			//T.setInitialized();    // cambiato dalla versione di ga. vedere se T è accessibile da altre parti
+
 			initialized = true;
 			return new VoidType() ;
 		}

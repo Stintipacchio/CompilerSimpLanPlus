@@ -56,7 +56,7 @@ public class ProgNode implements Node {
 	public Type typeCheck() {
 		if(this.Tipo_prog.equals("caso1")){
 			return exp.typeCheck();
-		} else if (this.Tipo_prog.equals("caso1")) {
+		} else if (this.Tipo_prog.equals("caso2")) {
 
 			if (listDec!=null)
 				for (Node dec:listDec)
