@@ -1,7 +1,5 @@
-int x;
-
-int f(int d){
-    if (d==4) { x = d - 3; x } else { x = d * 4; x }
-}
-
-f(4);
+void h(int n){
+  	  int x ; int y ;
+          if (n==0){ x = n+1 ;} else { h(n-1) ; x = n ; y = x ;}
+     }
+     h(5) ;
