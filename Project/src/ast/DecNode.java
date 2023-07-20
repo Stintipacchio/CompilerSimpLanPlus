@@ -33,9 +33,8 @@ public class DecNode implements Node {
 	}
   
 	public String codeGeneration() {
-		return
-				"pushr A0 \n" ;
-	}  
+		return "subi SP 1 \n";
+	}
     
 	public String toPrint(String s) {
 		return s + "Var:" + id + type.toPrint(" ") + "\n";

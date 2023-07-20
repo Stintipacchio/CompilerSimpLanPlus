@@ -40,7 +40,6 @@ public class PlusMinusNode implements Node {
 			+ "pushr A0 \n"
 			+ right.codeGeneration()
 			+ "popr T1 \n"
-			+ "add A0 T1 \n"
 			+ (Op.equals("+") ? "add T1 A0 \n" : "sub T1 A0 \n")
 			+ "popr A0 \n" ;
 }

@@ -2,14 +2,14 @@ move SP FP
 pushr FP 
 move SP AL 
 pushr AL 
-pushr A0 
+subi SP 1 
 push function0
 pushr FP 
 move SP FP 
 addi FP 1 
 move AL T1
 pushr T1 
-storei A0 5
+storei A0 4
 pushr A0
 move FP AL 
 subi AL 1 
@@ -52,7 +52,6 @@ store A0 0(T1)
 pushr A0 
 storei A0 3
 popr T1 
-add A0 T1 
 sub T1 A0 
 popr A0 
 move AL T1 
