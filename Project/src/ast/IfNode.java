@@ -42,8 +42,8 @@ public class IfNode implements Node {
 				if (thenexp.getClass().equals(elseexp.getClass()))
 					return thenexp;
 				else {
-					System.out.println("Type Error: incompatible types in then and else branches");
-					return new ErrorType();
+					throw new Error("Type Error: incompatible types in then and else branches");
+					//return new ErrorType();
 				}
 			} else if (tipo_if.equals("caso2")) {
 				Type thenexp = thenbranch.typeCheck();
@@ -52,15 +52,15 @@ public class IfNode implements Node {
 					if (thenexp.getClass().equals(elseexp.getClass()))
 						return thenexp;
 					else {
-						System.out.println("Type Error: incompatible types in then and else branches");
-						return new ErrorType();
+						throw new Error("Type Error: incompatible types in then and else branches");
+						//return new ErrorType();
 					}
 				}
 				return thenexp;
 			}
 		}
-		System.out.println("Type Error: non boolean condition in if");
-		return new ErrorType();
+		throw new Error("Type Error: non boolean condition in if");
+		//return new ErrorType();
 	}
 
   

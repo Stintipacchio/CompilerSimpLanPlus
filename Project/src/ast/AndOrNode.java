@@ -30,8 +30,8 @@ public class AndOrNode implements Node {
 		  if ((left.typeCheck() instanceof BoolType) && (right.typeCheck() instanceof BoolType) ) 
 			  return new BoolType() ;
 		  else {
-			  System.out.println("Type Error: Non boolean in an AND/OR compare") ;
-			  return new ErrorType() ;
+			  throw new Error("Type Error: Non boolean in an AND/OR compare") ;
+			  //return new ErrorType() ;
 		  }
 	}  
   

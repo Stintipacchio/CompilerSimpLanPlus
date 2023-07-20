@@ -35,23 +35,23 @@ public class CallNode implements Node {
 		if (_type instanceof ArrowType) {			 
 			ArrayList<Type> _partype = ((ArrowType) _type).get_inputtype();
 			if ( _partype.size() != parameters.size() ) {
-				System.out.println("Wrong number of parameters in the invocation of "+id);
-				return new ErrorType() ;
+				throw new Error("Wrong number of parameters in the invocation of "+id);
+				//return new ErrorType() ;
 			} else {
 				boolean ok = true ;
 				for (int i = 0 ; i < parameters.size() ; i++) {
 					Type par_i = (parameters.get(i)).typeCheck() ;
 					if ( !(par_i.getClass().equals(_partype.get(i).getClass()) )) {
-							System.out.println("Wrong type for "+(i+1)+"-th parameter in the invocation of "+id);
-							ok = false ;
+						throw new Error("Wrong type for "+(i+1)+"-th parameter in the invocation of "+id);
+						//	ok = false ;
 					} 
 				}
 				if (ok) return ((ArrowType) _type).get_outputtype() ;
 				else return new ErrorType() ;
 			} 
 		} else {
-				System.out.println("Invocation of a non-function "+id) ;
-				return new ErrorType() ;
+			throw new Error("Invocation of a non-function "+id) ;
+				//return new ErrorType() ;
 		}
 	}
   

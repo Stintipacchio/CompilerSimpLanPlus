@@ -58,8 +58,8 @@ public class VarStmNode implements Node {
 			return new VoidType() ;
 		}
 		else {
-			System.out.println("Type Error: incompatible type of expression for variable "+id) ;
-			return new ErrorType() ;
+			throw new Error("Type Error: incompatible type of expression for variable "+id) ;
+			//return new ErrorType() ;
 		}
 	}
   

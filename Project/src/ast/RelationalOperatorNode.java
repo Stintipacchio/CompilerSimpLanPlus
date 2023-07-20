@@ -32,8 +32,8 @@ public class RelationalOperatorNode implements Node {
 		if (tl.getClass().equals(tr.getClass())) 
 			  return new BoolType() ;
 		else {
-			  System.out.println("Type Error: Different types in equality") ;
-			  return new ErrorType() ;
+			throw new Error("Type Error: Different types in equality") ;
+			  //return new ErrorType() ;
 		  }
 	}  
 

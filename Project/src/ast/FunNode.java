@@ -101,8 +101,8 @@ public class FunNode implements Node {
 			return new VoidType();
 		}
 		else {
-			System.out.println("Wrong return type for function "+ ID);
-			return new ErrorType() ;
+			throw new Error("Wrong return type for function "+ ID);
+			//return new ErrorType() ;
 		}
 	}
   

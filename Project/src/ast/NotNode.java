@@ -26,8 +26,8 @@ public class NotNode implements Node {
 		  if (ctx.typeCheck() instanceof BoolType) 
 			  return new BoolType() ;
 		  else {
-			  System.out.println("Type Error: Non boolean in Not operation") ;
-			  return new ErrorType() ;
+			  throw new Error("Type Error: Non boolean in Not operation") ;
+			  //return new ErrorType() ;
 		  }
 	}  
 	  
