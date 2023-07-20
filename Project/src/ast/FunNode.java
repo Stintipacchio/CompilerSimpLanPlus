@@ -61,6 +61,8 @@ public class FunNode implements Node {
 			
 			flabel = SimpLanlib.freshFunLabel() ;
 			ST.insert(ID, type, nesting, flabel) ;
+			STentry T = ST.lookup(ID);
+			T.setInitialized();
 
 			for (Node stm : stmlist)
 				errors.addAll(stm.checkSemantics(ST, nesting+1));
@@ -68,6 +70,10 @@ public class FunNode implements Node {
 			if(exp!=null)
 				errors.addAll(exp.checkSemantics(ST, nesting+1));
 
+			ST.remove();
+			ST.insert(ID, type, nesting, flabel) ;
+			T = ST.lookup(ID);
+			T.setInitialized();
 		}
 		return errors ; // problemi con la generazione di codice!
 	}
