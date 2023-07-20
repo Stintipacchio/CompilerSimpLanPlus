@@ -1,4 +1,4 @@
-// Generated from C:/Users/stint/Desktop/CompilerSimpLanPlus/Project/src\SimpLanPlus.g4 by ANTLR 4.12.0
+// Generated from C:/Users/lucag/OneDrive/Documenti/GitHub/CompilerSimpLanPlus/Project/src\SimpLanPlus.g4 by ANTLR 4.12.0
 package antlr;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;

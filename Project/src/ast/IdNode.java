@@ -35,8 +35,9 @@ public class IdNode implements Node {
 			System.out.println("Type Error: Var '"+id+"' not initialized");
 			return new ErrorType() ;
 		}
-		else
-			return type.gettype() ;
+		else {
+			return type.gettype();
+		}
 	}
   
 	public String codeGeneration() {

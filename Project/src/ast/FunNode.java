@@ -72,33 +72,32 @@ public class FunNode implements Node {
 		return errors ; // problemi con la generazione di codice!
 	}
   
- 	public Type typeCheck () {
+ 	public Type typeCheck () throws Error {
 
 
-		if (declist != null)
-			for(Node innerD: this.declist)
+		if (declist != null) {
+			for (Node innerD : this.declist)
 				innerD.typeCheck();
+
+		}
+
 		if (stmlist != null)
 			for(Node innerS: this.stmlist)
 				innerS.typeCheck();
 
-		if(returntype instanceof VoidType) {
-			if(exp == null)
-				return new VoidType();
-			else
-			{
-				System.out.println("Wrong return type for function "+ID);
-				return new ErrorType() ;
-			}
-		}
 		if(exp!=null) {
 			Type exp_type = exp.typeCheck();
 			if ( (exp.typeCheck().getClass()).equals(returntype.getClass())) {
 				return exp_type;
 			}
 		}
-		System.out.println("Wrong return type for function "+ID);
-		return new ErrorType() ;
+		if(returntype instanceof VoidType && exp==null) {
+			return new VoidType();
+		}
+		else {
+			System.out.println("Wrong return type for function "+ ID);
+			return new ErrorType() ;
+		}
 	}
   
   public String codeGeneration() {

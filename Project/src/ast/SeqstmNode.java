@@ -46,7 +46,7 @@ public class SeqstmNode implements Node {
 				if (stmNode instanceof ErrorType)
 					return new ErrorType();
 			}
-		return stmNode;
+		return exp.typeCheck();
 	}  
   
 	public String codeGeneration() {
