@@ -25,7 +25,7 @@ public class VarStmNode implements Node {
    		ArrayList<SemanticError> errors = new ArrayList<SemanticError>();
   		nesting = _nesting ;
   		T = ST.lookup(id);
-		T.setInitialized();
+		//T.setInitialized();
 
 		if (T == null)
         	errors.add(new SemanticError("Variabile '" + id + "' non è stata dichiarata"));
@@ -55,6 +55,7 @@ public class VarStmNode implements Node {
 		if (expvar.getClass().equals(type.getClass() )) {
 
 			initialized = true;
+			T.setInitialized();
 			return new VoidType() ;
 		}
 		else {
