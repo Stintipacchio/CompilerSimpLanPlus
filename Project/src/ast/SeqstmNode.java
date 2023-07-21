@@ -50,14 +50,16 @@ public class SeqstmNode implements Node {
 			return exp.typeCheck();
 		return new ErrorType();
 	}
-  
+
 	public String codeGeneration() {
 		String stmlCode="";
 		for (Node s: listStm)
-		    stmlCode += s.codeGeneration();
+			stmlCode += s.codeGeneration();
+		if (exp != null)
+			stmlCode += exp.codeGeneration();
 		return stmlCode;
-	}  
-  
+	}
+
 	public String toPrint(String s) {
 		String stmlstr= "";
 		
