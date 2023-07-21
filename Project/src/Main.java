@@ -97,12 +97,12 @@ public class Main {
 
 
         String code=albero_grammatica.codeGeneration();
-        BufferedWriter out = new BufferedWriter(new FileWriter("prova.asm"));
+        BufferedWriter out = new BufferedWriter(new FileWriter("out/Intermediate-code.asm"));
         out.write(code);
         out.close();
         System.out.println("Code generated! Assembling and running generated code.");
 
-        FileInputStream isASM = new FileInputStream("prova.asm");
+        FileInputStream isASM = new FileInputStream("out/Intermediate-code.asm");
         ANTLRInputStream inputASM = new ANTLRInputStream(isASM);
         SVMLexer lexerASM = new SVMLexer(inputASM);
         CommonTokenStream tokensASM = new CommonTokenStream(lexerASM);
