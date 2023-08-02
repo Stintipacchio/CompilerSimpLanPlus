@@ -40,22 +40,24 @@ public class Main {
             token = lexer.nextToken();
         }
 
-        System.out.println("Numero di errori lessicali: "+ lexerErrors.size());
+        if(!lexerErrors.isEmpty()) {
+            File f = new File("out/errors.txt");
+            if (!f.exists()) {
+                f.createNewFile();
+            } else {
+                f.delete();
+                f.createNewFile();
+            }
 
-        File f = new File("out/errors.txt");
-        if (!f.exists()) {
-            f.createNewFile();
-        } else {
-            f.delete();
-            f.createNewFile();
-        }
+            for (int i = 0; i < lexerErrors.size(); i++) {
+                int errLine = lexerErrors.get(i).getLine();
+                String errStr = lexerErrors.get(i).getText();
+                int errPos = lexerErrors.get(i).getCharPositionInLine() + 1;
+                String toWrite = "Errore " + i + 1 + ": Linea " + errLine + ", carattere numero " + errPos + " -> " + errStr + "\n";
+                Files.write(Paths.get("out/errors.txt"), toWrite.getBytes(), StandardOpenOption.APPEND);
+            }
 
-        for (int i = 0; i < lexerErrors.size(); i++) {
-            int errLine = lexerErrors.get(i).getLine();
-            String errStr = lexerErrors.get(i).getText();
-            int errPos = lexerErrors.get(i).getCharPositionInLine() + 1;
-            String toWrite = "Errore " + i + 1 + ": Linea " + errLine + ", carattere numero " + errPos + " -> " + errStr + "\n";
-            Files.write(Paths.get("out/errors.txt"), toWrite.getBytes(), StandardOpenOption.APPEND);
+            throw new Error("Numero di errori lessicali: " + lexerErrors.size());
         }
 
         //analisi sintattica
@@ -74,11 +76,11 @@ public class Main {
 
 
         if(errors.size()>0){
-            System.out.println("You had " + errors.size() + " errors:");
+            System.err.println("You had " + errors.size() + " errors:");
             for(SemanticError e : errors) {
-                System.out.println("\t" + e);
+                System.err.println("\t" + e);
             }
-
+            throw new Error();
         }
 
 
@@ -86,7 +88,7 @@ public class Main {
         Node type = (Node)albero_grammatica.typeCheck(); //type-checking bottom-up
 
         if (type instanceof ErrorType)
-            System.out.println("Type checking is WRONG!");
+            throw new Error("Type checking is WRONG!");
         else {
             System.out.println("CheckSemantic ok!");
             System.out.println("Type checking ok!\n");

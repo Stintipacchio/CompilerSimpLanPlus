@@ -1,9 +1,5 @@
-int u ;
-int f(int n){
-        int y ;
-	y = 1 ;
-	if (n == 0) { y }
-	else { y = f(n-1) ; y*n }
-}
-u = 6 ;
-f(u)
+int x;
+int y;
+y = 1;
+if (y > 0) {x = 1;}
+else {y = 0;}

@@ -49,6 +49,8 @@ public class IfNode implements Node {
 				Type thenexp = thenbranch.typeCheck();
 				if (elsebranch != null) {
 					Type elseexp = elsebranch.typeCheck();
+					System.out.println(thenexp.getClass());
+					System.out.println(elseexp.getClass());
 					if (thenexp.getClass().equals(elseexp.getClass()))
 						return thenexp;
 					else {
