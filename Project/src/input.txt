@@ -1,7 +1,37 @@
-int u ;
-void f(int m, int n){
-int x;
-    if (n>m) { m = m+n ;}
-    else {x = 1 ; f(m+1,n+1) ; }
+int x1;
+int x2;
+int x3;
+bool y1;
+bool y2;
+bool y3;
+void f1 (int a, int b){
+    int x4;
+    bool y4;
+    x4 = 10;
+    y4 = true;
+
+    if( y4) {x1 = 10 + a + b; }
+    else { y4 = false;}
 }
-f(4,5) ;
+void f2(int m, int n){
+    int x;
+
+    if (n>m) { m = m+n ;}
+    else {x = 1 ; f2(m+1,n+1) ; }
+}
+
+
+x1 = 1;
+x2 = 2 + x1;
+x3 = x1 + x2;
+y1 = true;
+y2 = y1;
+y3 = false;
+
+if(y1 && y3){x2 = x3;}
+else { x3 = x2;}
+if(x2 == x1){x1 = x2 * x1; y1 = false;}
+else {y2 = false;}
+
+f1(x1, x2);
+f2(4,5);
