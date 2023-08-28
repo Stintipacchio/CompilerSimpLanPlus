@@ -48,6 +48,8 @@ public class SeqstmNode implements Node {
 			}
 		if (exp != null)
 			return exp.typeCheck();
+		if(Tipo_if == "stm")
+			return new VoidType();
 		return new ErrorType();
 	}
 

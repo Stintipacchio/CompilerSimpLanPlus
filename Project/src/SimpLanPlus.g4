@@ -19,7 +19,7 @@ type   : 'int'
        ;
 
 stm    : ID '=' exp ';'                                                                                                 #stmAsg
-       | ID '(' (exp (',' exp)* )? ')' ';'                                                                              #stmCallFun  //
+       | ID '(' (exp (',' exp)* )? ')' ';'                                                                              #stmCallFun
        | 'if' '(' condition=exp ')' '{' thenBranch=stmThenBranch '}' ('else' '{' elseBranch=stmElseBranch '}')?         #stmIf
 	   ;
 
@@ -35,11 +35,11 @@ exp    :  INTEGER                                                               
        | '!' exp                                                                                                        #expNotId
        | e1=exp (op='*' | op='/') e2=exp                                                                                #expMulDiv
        | e1=exp (op='+' | op='-') e2=exp                                                                                #expPlusMinus
-       | e1=exp (op='>' | op='<' | op='>=' | op='<=' | op='==') e2=exp                                                  #expReop//#cfrExp   prima
-       | e1=exp (op='&&' | op='||') e2=exp                                                                              #expAndOr   //
+       | e1=exp (op='>' | op='<' | op='>=' | op='<=' | op='==') e2=exp                                                  #expReop
+       | e1=exp (op='&&' | op='||') e2=exp                                                                              #expAndOr
        | 'if' '(' condition=exp ')' '{' thenBranch=expThenBranch '}' 'else' '{' elseBranch=expElseBranch '}'            #expIf
        | '(' exp ')'                                                                                                    #expBracket
-       | ID '(' (exp (',' exp)* )? ')'                                                                                  #expCallFun  //
+       | ID '(' (exp (',' exp)* )? ')'                                                                                  #expCallFun
        ;
 
 expThenBranch    : (stm)* exp ;

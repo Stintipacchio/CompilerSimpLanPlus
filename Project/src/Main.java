@@ -92,7 +92,6 @@ public class Main {
         else {
             System.out.println("CheckSemantic ok!");
             System.out.println("Type checking ok!\n");
-            System.out.println("Symbol Table: \n" + symbol_table.toPrint());
         }
 
 
