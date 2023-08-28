@@ -107,110 +107,128 @@ public class ExecuteVM {
             int tmp ;
             int address;
             switch ( bytecode.getCode() ) {
-                case SVMParser.PUSH:
-                   push(Integer.parseInt(bytecode.getArg1())) ;
-                   ip = ip+1 ;
-            	   break;
-                case SVMParser.PUSHR:
-                 	push(read(bytecode.getArg1()));
-                	ip = ip+1 ;
-                	break ;
-                case SVMParser.POP:
-            	  		pop();
-            	  		ip = ip+1 ;
-            	  		break;
-                case SVMParser.LOAD:
-                	tmp = read(bytecode.getArg3()) + Integer.parseInt(bytecode.getArg2()) ;	
-                    if ((tmp < 0) || (tmp >= MEMSIZE)) {
-                        System.out.println("\nError: Null pointer exception");
-                        return;
-                    } else {
-                    	memory[tmp] = read(bytecode.getArg1()) ;
-                    	ip = ip+1 ;
-                    	break;
-                    }
-                case SVMParser.STOREI:
-                    update(bytecode.getArg1(), Integer.parseInt(bytecode.getArg2())) ;
-                      ip = ip+1 ;
-                    break;
-                case SVMParser.STORE:
-                	tmp = read(bytecode.getArg3()) + Integer.parseInt(bytecode.getArg2()) ;	
-                    if ((tmp < 0) || (tmp >= MEMSIZE)) {
-                        System.out.println("\nError: Null pointer exception");
-                        return;
-                    } else {
-                    	update(bytecode.getArg1(), memory[tmp]);            	
-                    	ip = ip+1 ;
-                    	break;
-                    }
-                case SVMParser.MOVE:
-                    update(bytecode.getArg2(), read(bytecode.getArg1())) ;
-                    ip = ip+1 ;
-                    break;
-                case SVMParser.ADD:
-                    push(read(bytecode.getArg1()) + read(bytecode.getArg2())) ;
-                    ip = ip+1 ;
-            	  	break;
-                case SVMParser.ADDI:
-                	update(bytecode.getArg1(), read(bytecode.getArg1()) + Integer.parseInt(bytecode.getArg2()) );
-                    ip = ip+1 ;
-            	  	break;
-                case SVMParser.SUB:
-                    push(read(bytecode.getArg1()) - read(bytecode.getArg2()));
-                    ip = ip+1 ;
-            	  	break;
-                case SVMParser.SUBI:
-                	update(bytecode.getArg1(), read(bytecode.getArg1()) - Integer.parseInt(bytecode.getArg2()) );
-                     ip = ip+1 ;
-            	  	break;
-                case SVMParser.MUL:
-                    push(read(bytecode.getArg1()) * read(bytecode.getArg2()));
-                    ip = ip+1 ;
-            	  	break;
-                case SVMParser.MULI:
-                	update(bytecode.getArg1(), read(bytecode.getArg1()) * Integer.parseInt(bytecode.getArg2()) ) ;
-                    ip = ip+1 ;
-            	  	break;
-                case SVMParser.DIV:
-                    push(read(bytecode.getArg1()) / read(bytecode.getArg2()));
-                    ip = ip+1 ;
-            	  	break;
-                case SVMParser.DIVI:
-                    update(bytecode.getArg1(), read(bytecode.getArg1()) / Integer.parseInt(bytecode.getArg2()) );
-                    ip = ip+1 ;
-            	  	break;
-                case SVMParser.POPR : //
-                	update(bytecode.getArg1(), memory[sp+1]); 
-                	pop() ;
-                	ip = ip+1 ;
-            	  	break;
-                case SVMParser.BRANCH:
-                    address = ip + 1;
-                    ip = code[address].getCode() ;
-                    break;              
-                case SVMParser.BRANCHEQ : //
-                	if (read(bytecode.getArg1()) == read(bytecode.getArg2())){
-                			address = ip+1;
-                			ip = code[address].getCode() ;
-                	} else ip = ip+2 ;
-             	  	break;
-              case SVMParser.BRANCHLESSEQ :
-          			if (read(bytecode.getArg1()) <= read(bytecode.getArg2())){
-          				address = ip+1;
-          				ip = code[address].getCode() ;
-          			} else ip = ip+2 ;
-          			break;
-              case SVMParser.JUMPSUB : 
-            	  	ra = ip+1 ;
-            	  	address = ip ;
-            	  	ip = Integer.parseInt(code[address].getArg1())  ;
-            	  	break;	
-              case SVMParser.RETURNSUB:
-                    ip = read(bytecode.getArg1()) ;
-                    break;
-              case SVMParser.HALT : //to print the result 
-             		System.out.println("\nResult: " + a0 + "\n");
-             		return;          
+				case SVMParser.PUSH:
+				   push(Integer.parseInt(bytecode.getArg1())) ;
+				   ip = ip+1 ;
+				   break;
+				case SVMParser.PUSHR:
+					push(read(bytecode.getArg1()));
+					ip = ip+1 ;
+					break ;
+				case SVMParser.POP:
+						pop();
+						ip = ip+1 ;
+						break;
+				case SVMParser.LOAD:
+					tmp = read(bytecode.getArg3()) + Integer.parseInt(bytecode.getArg2()) ;
+					if ((tmp < 0) || (tmp >= MEMSIZE)) {
+						System.out.println("\nError: Null pointer exception");
+						return;
+					} else {
+						memory[tmp] = read(bytecode.getArg1()) ;
+						ip = ip+1 ;
+						break;
+					}
+				case SVMParser.STOREI:
+					update(bytecode.getArg1(), Integer.parseInt(bytecode.getArg2())) ;
+					  ip = ip+1 ;
+					break;
+				case SVMParser.STORE:
+					tmp = read(bytecode.getArg3()) + Integer.parseInt(bytecode.getArg2()) ;
+					if ((tmp < 0) || (tmp >= MEMSIZE)) {
+						System.out.println("\nError: Null pointer exception");
+						return;
+					} else {
+						update(bytecode.getArg1(), memory[tmp]);
+						ip = ip+1 ;
+						break;
+					}
+				case SVMParser.MOVE:
+					update(bytecode.getArg2(), read(bytecode.getArg1())) ;
+					ip = ip+1 ;
+					break;
+				case SVMParser.ADD:
+					push(read(bytecode.getArg1()) + read(bytecode.getArg2())) ;
+					ip = ip+1 ;
+					break;
+				case SVMParser.ADDI:
+					update(bytecode.getArg1(), read(bytecode.getArg1()) + Integer.parseInt(bytecode.getArg2()) );
+					ip = ip+1 ;
+					break;
+				case SVMParser.SUB:
+					push(read(bytecode.getArg1()) - read(bytecode.getArg2()));
+					ip = ip+1 ;
+					break;
+				case SVMParser.SUBI:
+					update(bytecode.getArg1(), read(bytecode.getArg1()) - Integer.parseInt(bytecode.getArg2()) );
+					 ip = ip+1 ;
+					break;
+				case SVMParser.MUL:
+					push(read(bytecode.getArg1()) * read(bytecode.getArg2()));
+					ip = ip+1 ;
+					break;
+				case SVMParser.MULI:
+					update(bytecode.getArg1(), read(bytecode.getArg1()) * Integer.parseInt(bytecode.getArg2()) ) ;
+					ip = ip+1 ;
+					break;
+				case SVMParser.DIV:
+					push(read(bytecode.getArg1()) / read(bytecode.getArg2()));
+					ip = ip+1 ;
+					break;
+				case SVMParser.DIVI:
+					update(bytecode.getArg1(), read(bytecode.getArg1()) / Integer.parseInt(bytecode.getArg2()) );
+					ip = ip+1 ;
+					break;
+				case SVMParser.POPR : //
+					update(bytecode.getArg1(), memory[sp+1]);
+					pop() ;
+					ip = ip+1 ;
+					break;
+				case SVMParser.BRANCH:
+					address = ip + 1;
+					ip = code[address].getCode() ;
+					break;
+				case SVMParser.BRANCHEQ : //
+					if (read(bytecode.getArg1()) == read(bytecode.getArg2())){
+							address = ip+1;
+							ip = code[address].getCode() ;
+					} else ip = ip+2 ;
+					break;
+				case SVMParser.BRANCHLESSEQ :
+					if (read(bytecode.getArg1()) <= read(bytecode.getArg2())){
+						address = ip+1;
+						ip = code[address].getCode() ;
+					} else ip = ip+2 ;
+					break;
+				case SVMParser.BRANCHEGT:
+					if (read(bytecode.getArg1()) > read(bytecode.getArg2())){
+						address = ip+1;
+						ip = code[address].getCode() ;
+					} else ip = ip+2 ;
+					break;
+				case SVMParser.BRANCHEQLT:
+					if (read(bytecode.getArg1()) < read(bytecode.getArg2())){
+						address = ip+1;
+						ip = code[address].getCode() ;
+					} else ip = ip+2 ;
+					break;
+				case SVMParser.BRANCHEQGTE:
+					if (read(bytecode.getArg1()) >= read(bytecode.getArg2())){
+						address = ip+1;
+						ip = code[address].getCode() ;
+					} else ip = ip+2 ;
+					break;
+				case SVMParser.JUMPSUB :
+					ra = ip+1 ;
+					address = ip ;
+					ip = Integer.parseInt(code[address].getArg1())  ;
+					break;
+				case SVMParser.RETURNSUB:
+					ip = read(bytecode.getArg1()) ;
+					break;
+				case SVMParser.HALT : //to print the result
+					System.out.println("\nResult: " + a0 + "\n");
+					return;
             } 
     	}   	  	
     } 
